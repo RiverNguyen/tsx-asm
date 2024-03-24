@@ -1,0 +1,57 @@
+{
+  "products": [
+    {
+      "category": "Bàn",
+      "name": "Syltherine",
+      "price": "500",
+      "sale": "20",
+      "image": "https://picsum.photos/id/12/665/500",
+      "description": "Bàn đẹp",
+      "id": 1
+    },
+    {
+      "category": "Ghế",
+      "name": "Leviosa",
+      "price": "100",
+      "sale": "10",
+      "image": "https://picsum.photos/id/10/665/500",
+      "description": "Ghế đẹp",
+      "id": 2
+    },
+    {
+      "category": "Sofa",
+      "name": "Luxury",
+      "price": "1000",
+      "sale": "10",
+      "image": "https://picsum.photos/id/13/665/500",
+      "description": "Sofa đep",
+      "id": 3
+    },
+    {
+      "category": "Bộ",
+      "name": "Bàn ghế",
+      "price": "2000",
+      "sale": "10",
+      "image": "https://picsum.photos/id/14/665/500",
+      "description": "Bàn ghế đep",
+      "id": 4
+    }
+  ],
+  "menus": [
+    {
+      "id": "1",
+      "label": "Thống kê",
+      "path": "/admin"
+    },
+    {
+      "id": "2",
+      "label": "Sản phẩm",
+      "path": "/admin/products"
+    },
+    {
+      "id": "3",
+      "label": "Tài khoản",
+      "path": "/admin/accounts"
+    }
+  ]
+}
