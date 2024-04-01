@@ -5,7 +5,7 @@
       "name": "Syltherine",
       "price": "500",
       "sale": "20",
-      "image": "https://picsum.photos/id/12/665/500",
+      "image": "https://picsum.photos/id/12/3840/2160",
       "description": "Bàn đẹp",
       "id": 1
     },
@@ -14,7 +14,7 @@
       "name": "Leviosa",
       "price": "100",
       "sale": "10",
-      "image": "https://picsum.photos/id/10/665/500",
+      "image": "https://picsum.photos/id/10/3480/2160",
       "description": "Ghế đẹp",
       "id": 2
     },
@@ -23,7 +23,7 @@
       "name": "Luxury",
       "price": "1000",
       "sale": "10",
-      "image": "https://picsum.photos/id/13/665/500",
+      "image": "https://picsum.photos/id/13/3480/2160",
       "description": "Sofa đep",
       "id": 3
     },
@@ -32,7 +32,7 @@
       "name": "Bàn ghế",
       "price": "2000",
       "sale": "10",
-      "image": "https://picsum.photos/id/14/665/500",
+      "image": "https://picsum.photos/id/14/3480/2160",
       "description": "Bàn ghế đep",
       "id": 4
     }
@@ -51,7 +51,19 @@
     {
       "id": "3",
       "label": "Tài khoản",
-      "path": "/admin/accounts"
+      "path": "/admin/users"
+    }
+  ],
+  "users": [
+    {
+      "email": "ngiang1309@gmail.com",
+      "password": "$2a$10$RH.PB.F31aN3PdaZcAHh2uIDUHjsBMHQRTs0HcBF/wxta9d2EhA76",
+      "id": 1
+    },
+    {
+      "email": "member@gmail.com",
+      "password": "$2a$10$nYQMG5kWPU4mH9yvH8kNPOwEGTY672SZgza5wXKccvzU7NDV4CkLO",
+      "id": 2
     }
   ]
 }

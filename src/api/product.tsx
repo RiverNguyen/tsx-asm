@@ -1,4 +1,4 @@
-import { IProduct } from "../interfaces/Product";
+import { IProduct } from "../interfaces/Product.ts";
 import instance from "./config";
 
 export const getProducts = async () => {
@@ -17,7 +17,7 @@ export const getProductById = async (id: Number | String) => {
         console.log(error);
     }
 };
-export const removeProductById = async (id: Number | String) => {
+export const deleteProduct = async (id: Number | String) => {
     try {
         const { data } = await instance.delete(`/products/${id}`);
         return data;

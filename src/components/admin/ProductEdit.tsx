@@ -1,55 +1,22 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import { IProduct } from "../../interfaces/Product";
 import { useParams } from "react-router-dom";
+import MutationQuery from "../../hooks/MutationQuery.tsx";
+import ProductQuery from "../../hooks/ProductQuery.tsx";
+import { useEffect } from "react";
 
 const ProductEdit = () => {
     const { id } = useParams();
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-        reset,
-    } = useForm();
-
-    const queryClient = useQueryClient();
-
-    useQuery({
-        queryKey: ["PRODUCT_KEY", id],
-        queryFn: async () => {
-            const { data } = await axios.get(
-                `http://localhost:3000/products/${id}`
-            );
-            reset(data);
-            return data;
-        },
+    const { data, isPending } = ProductQuery(id);
+    const { form, onSubmit } = MutationQuery({
+        action: "UPDATE",
     });
 
-    const mutation = useMutation({
-        mutationFn: async (product: IProduct) => {
-            const { data } = await axios.put(
-                `http://localhost:3000/products/${product.id}`,
-                product
-            );
-            return data;
-        },
-        onSuccess: () => {
-            toast.success("Cập nhật sản phẩm thành công");
-            queryClient.invalidateQueries({
-                queryKey: ["PRODUCT_KEY"],
-            });
-        },
-    });
+    useEffect(() => {
+        form.reset(data);
+    }, [form, data, id]);
 
-    const onSubmit = (data: any) => {
-        mutation.mutate(data);
-        console.log(data);
-    };
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
                 <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 className="h2">Sửa sản phẩm</h1>
                 </div>
@@ -60,9 +27,9 @@ const ProductEdit = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("category", { required: true })}
+                        {...form.register("category", { required: true })}
                     />
-                    {errors.category && (
+                    {form.formState.errors.category && (
                         <span className="text-danger">Không biết nhập à ?</span>
                     )}
                 </div>
@@ -73,9 +40,9 @@ const ProductEdit = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("name", { required: true })}
+                        {...form.register("name", { required: true })}
                     />
-                    {errors.name && (
+                    {form.formState.errors.name && (
                         <span className="text-danger">Không biết nhập à ?</span>
                     )}
                 </div>
@@ -86,9 +53,9 @@ const ProductEdit = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("price", { required: true })}
+                        {...form.register("price", { required: true })}
                     />
-                    {errors.price && (
+                    {form.formState.errors.price && (
                         <span className="text-danger">Không biết nhập à ?</span>
                     )}
                 </div>
@@ -99,9 +66,9 @@ const ProductEdit = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("sale", { required: true })}
+                        {...form.register("sale", { required: true })}
                     />
-                    {errors.sale && (
+                    {form.formState.errors.sale && (
                         <span className="text-danger">Không biết nhập à ?</span>
                     )}
                 </div>
@@ -112,9 +79,9 @@ const ProductEdit = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("image", { required: true })}
+                        {...form.register("image", { required: true })}
                     />
-                    {errors.image && (
+                    {form.formState.errors.image && (
                         <span className="text-danger">Không biết nhập à ?</span>
                     )}
                 </div>
@@ -126,11 +93,13 @@ const ProductEdit = () => {
                         id=""
                         cols={30}
                         rows={10}
-                        {...register("description")}
+                        {...form.register("description")}
                         className="form-control"
                     ></textarea>
                 </div>
-                <button className="btn btn-primary">Cập nhật</button>
+                <button className="btn btn-primary">
+                    {isPending ? "Đang cập nhật..." : "Cập nhật"}
+                </button>
             </form>
         </>
     );

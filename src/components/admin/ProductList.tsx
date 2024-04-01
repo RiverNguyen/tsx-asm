@@ -1,31 +1,15 @@
 import { Link } from "react-router-dom";
+import MutationQuery from "../../hooks/MutationQuery.tsx";
 import ProductQuery from "../../hooks/ProductQuery";
-import { IProduct } from "../../interfaces/Product";
-import { toast } from "react-toastify";
-import axios from "axios";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { IProduct } from "../../interfaces/Product.ts";
 
 const ProductList = () => {
+    // const { data, isLoading } = ProductQuery();
     const { data, isLoading } = ProductQuery();
 
-    const queryClient = useQueryClient();
-
-    const deleteProduct = useMutation({
-        mutationFn: async (id: number) => {
-            await axios.delete(`http://localhost:3000/products/${id}`);
-        },
-        onSuccess: () => {
-            toast.success("Xoá sản phẩm thành công");
-            queryClient.invalidateQueries({
-                queryKey: ["PRODUCT_KEY"],
-            });
-        },
+    const { mutate } = MutationQuery({
+        action: "DELETE",
     });
-
-    const handleDelete = (productId: any) => {
-        window.confirm("Bạn có chắc chắn muốn xoá sản phẩm này không ?") &&
-            deleteProduct.mutate(productId);
-    };
 
     if (isLoading) return <div>Loading...</div>;
 
@@ -83,7 +67,7 @@ const ProductList = () => {
                                         Sửa
                                     </Link>
                                     <button
-                                        onClick={() => handleDelete(product.id)}
+                                        onClick={() => mutate(product)}
                                         className="btn btn-danger"
                                     >
                                         Xoá

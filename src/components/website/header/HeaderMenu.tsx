@@ -34,7 +34,7 @@ const HeaderMenu = () => {
                     <div className="header-items">
                         <div className="header-item-user">
                             <span>
-                                <Link to={"/admin"}>
+                                <Link to={"/sign-up"}>
                                     <img src="/src/assets/icons/1.svg" alt="" />
                                 </Link>
                             </span>

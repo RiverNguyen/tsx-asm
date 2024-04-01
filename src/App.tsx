@@ -8,6 +8,12 @@ import ProductListAdmin from "./pages/admin/ProductList";
 import { ToastContainer } from "react-toastify";
 import ProductEditAdmin from "./pages/admin/ProductEdit";
 import Detail from "./pages/website/Detail";
+import SignUp from "./components/website/account/SignUp";
+import SignIn from "./components/website/account/SignIn";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
+import UserListAdmin from "./pages/admin/UserList";
+import Cart from "./pages/website/Cart";
+import Checkout from "./pages/website/Checkout";
 
 function App() {
     return (
@@ -17,11 +23,20 @@ function App() {
                     <Route path="/" index element={<Home />} />
                     <Route path="shop" element={<Shop />} />
                     <Route path="detail/:id" element={<Detail />} />
-                    <Route path="cart" element={<div>cart</div>} />
-                    <Route path="checkout" element={<div>checkout</div>} />
+                    <Route path="cart" element={<Cart />} />
+                    <Route path="checkout" element={<Checkout />} />
+                    <Route path="sign-up" element={<SignUp />} />
+                    <Route path="sign-in" element={<SignIn />} />
                 </Route>
 
-                <Route path="admin" element={<LayoutAdmin />}>
+                <Route
+                    path="admin"
+                    element={
+                        <ProtectedRoute>
+                            <LayoutAdmin />
+                        </ProtectedRoute>
+                    }
+                >
                     <Route path="products" element={<ProductListAdmin />} />
                     <Route
                         path="products/:id"
@@ -32,6 +47,7 @@ function App() {
                         path="products/edit/:id"
                         element={<ProductEditAdmin />}
                     />
+                    <Route path="users" element={<UserListAdmin />} />
                 </Route>
             </Routes>
             <ToastContainer />
